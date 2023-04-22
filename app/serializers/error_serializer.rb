@@ -15,4 +15,16 @@ class ErrorSerializer
       }
     }
   end
+
+  def serialize_login_error
+    {
+      data: {
+        type: "errors",
+        id: nil,
+        attributes: {
+          error_messages: "That username or that password, or the combination, could not be found in the system.",
+        }
+      }
+    }
+  end
 end

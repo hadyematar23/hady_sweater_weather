@@ -6,13 +6,10 @@ RSpec.describe "Creating a User", type: :request do
       it "you will make a post call with the proposed email, password, and password confirmation in the payload" do
 
         payload = {
-          "user" => {
             "email" => "hady1@gmail.com",
             "password" => "fakepassword",
             "password_confirmation" => "fakepassword"
-          }
         }
-
         post "/api/v0/users", headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, params: payload.to_json
 
         parsed_username = JSON.parse(response.body, symbolize_names: true)
@@ -33,15 +30,13 @@ RSpec.describe "Creating a User", type: :request do
     context "sad path" do 
       it "if the username already exists, you will get a status code of 409" do 
 
-        User.create!(email: "hady@gmail.com", password: "test123", password_confirmation: "test123", api_key: SecureRandom.hex(16))
+        User.create!(email: "hady1@gmail.com", password: "test123", password_confirmation: "test123")
 
         payload = {
-          "user" => {
-            "email" => "hady@gmail.com",
-            "password" => "fakepassword",
-            "password_confirmation" => "password"
-          }
-        }
+          "email" => "hady1@gmail.com",
+          "password" => "fakepassword",
+          "password_confirmation" => "fakepassword"
+      }
 
         post "/api/v0/users", headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, params: payload.to_json
 
@@ -59,12 +54,10 @@ RSpec.describe "Creating a User", type: :request do
 
       it "if the passwords don't match, you will get a 400 status code" do 
         payload = {
-          "user" => {
-            "email" => "hady@gmail.com",
-            "password" => "fakepassword",
-            "password_confirmation" => "password"
-          }
-        }
+          "email" => "hady1@gmail.com",
+          "password" => "password",
+          "password_confirmation" => "fakepassword"
+      }
 
         post "/api/v0/users", headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, params: payload.to_json
 
@@ -77,18 +70,15 @@ RSpec.describe "Creating a User", type: :request do
 
       it "if a field is missing, you will get a 400 status code" do 
         payload = {
-          "user" => {
-            "email" => "",
-            "password" => "fakepassword",
-            "password_confirmation" => "fakepassword"
-          }
-        }
+          "email" => "",
+          "password" => "fakepassword",
+          "password_confirmation" => "fakepassword"
+      }
 
         post "/api/v0/users", headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, params: payload.to_json
 
         expect(response).to have_http_status(400)
         parsed_error = JSON.parse(response.body, symbolize_names: true)
-        require 'pry'; binding.pry
 
         expect(parsed_error[:data][:attributes][:error_messages].first).to eq("Email can't be blank")
       end
