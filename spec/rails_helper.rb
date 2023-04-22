@@ -69,4 +69,15 @@ VCR.configure do |config|
   config.hook_into :webmock
   config.filter_sensitive_data('<Mapquest_API_KEY>') { ENV["Mapquest_API_KEY"] }
   config.configure_rspec_metadata!
+  config.default_cassette_options = {
+    record: :new_episodes,
+    match_requests_on: %i[method uri body headers]
+  }
+end
+
+Shoulda::Matchers.configure do |config|
+  config.integrate do |with|
+    with.test_framework :rspec
+    with.library :rails
+  end
 end

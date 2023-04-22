@@ -6,10 +6,7 @@ class MapquestService
   private 
 
   def get_url(payload)
-    response = connection.get(payload) do |req|
-      req.headers['Content-Type'] = 'application/json'
-      req.headers['Accept'] = 'application/json'
-    end
+    response = connection.get(payload) 
     JSON.parse(response.body, symbolize_names: true)
   end
 
