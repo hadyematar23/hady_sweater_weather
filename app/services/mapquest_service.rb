@@ -3,6 +3,7 @@ class MapquestService
   def get_coordinates(location)
     get_url("address?location=#{location}")
   end
+
   private 
 
   def get_url(payload)

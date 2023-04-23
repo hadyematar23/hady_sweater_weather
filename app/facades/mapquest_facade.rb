@@ -1,11 +1,15 @@
 class MapquestFacade
 
-  def initialize(location)
-    @location = location 
+  def find_location_coordinates(location)
     @service = MapquestService.new
+    coordinates = @service.get_coordinates(location)
   end
 
-  def find_location_coordinates
-    coordinates = @service.get_coordinates(@location)
+  def driving_directions(origin, destination)
+    @service = MapquestDrivingService.new
+    directions = @service.get_directions(origin, destination)
+    RoadTrip.new(origin, destination, directions[:route][:formattedTime])
   end
+
+  
 end

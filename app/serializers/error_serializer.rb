@@ -27,4 +27,16 @@ class ErrorSerializer
       }
     }
   end
+
+  def no_api_key
+    {
+      data: {
+        type: "errors",
+        id: nil,
+        attributes: {
+          error_messages: "You must pass a valid API key in the payload of your Post request",
+        }
+      }
+    }
+  end
 end
