@@ -33,5 +33,20 @@ class DestinationSerializer
       }
   }
   end
+
+  def serialize_destination_weather_error_trip_too_long(origin, destination, travel_time)
+    {
+      data: {
+          id: nil,
+          type: "road trip",
+          attributes: {
+              start_city: origin,
+              end_city: destination,
+              travel_time: travel_time,
+              weather_at_eta: "The current API can only support hourly forecast for up to five days out."
+          }
+      }
+  }
+  end
   
 end

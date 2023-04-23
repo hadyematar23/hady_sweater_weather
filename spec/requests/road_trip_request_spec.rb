@@ -152,7 +152,7 @@ RSpec.describe "Road Trip", type: :request do
 
       end
 
-      xit "trip possible but destination is over 5 days away and so cannot provide weather", :vcr do 
+      it "trip possible but destination is over 5 days away and so cannot provide weather", :vcr do 
         user = User.create!(email: "hady1@gmail.com", password: "test123", password_confirmation: "test123")
         
         payload = {
@@ -171,8 +171,8 @@ RSpec.describe "Road Trip", type: :request do
         expect(parsed_response[:data][:type]).to eq("road trip")
         expect(parsed_response[:data][:attributes][:start_city]).to eq("London,England")
         expect(parsed_response[:data][:attributes][:end_city]).to eq("Kuala Lumpur,Malysia")
-        expect(parsed_response[:data][:attributes][:travel_time]).to eq("impossible")
-        expect(parsed_response[:data][:attributes][:weather_at_eta]).to be_empty
+        expect(parsed_response[:data][:attributes][:travel_time]).to be_a(Integer)
+        expect(parsed_response[:data][:attributes][:weather_at_eta]).to eq("The current API can only support hourly forecast for up to five days out.")
       end
     end
   end 
