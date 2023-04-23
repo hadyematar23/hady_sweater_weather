@@ -16,7 +16,6 @@ class Api::V0::SessionsController < ApplicationController
   private 
 
   def session_params
-    require 'pry'; binding.pry
     params.require(:session).permit(:email, :password, :password_confirmation)
   end
 end

@@ -11,7 +11,6 @@ RSpec.describe "Forecast", type: :request do
       expect(headers[:HTTP_ACCEPT]).to eq("application/json")
 
       parsed_forecast = JSON.parse(response.body, symbolize_names: true)
-      require 'pry'; binding.pry      
       expect(parsed_forecast).to be_a(Hash)
       expect(parsed_forecast[:data][:id]).to eq(nil)
       expect(parsed_forecast[:data][:type]).to eq("forecast")

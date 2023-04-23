@@ -42,7 +42,7 @@ RSpec.describe "Creating a User", type: :request do
 
         expect(response).to have_http_status(409)
         parsed_error = JSON.parse(response.body, symbolize_names: true)
-
+      
         expect(parsed_error[:data]).to be_a(Hash)
         expect(parsed_error[:data][:type]).to eq("errors")
         expect(parsed_error[:data][:id]).to eq(nil)

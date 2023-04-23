@@ -5,7 +5,7 @@ class Api::V0::UsersController < ApplicationController
     if user.save
       render json: UserSerializer.new(user).serialize_user, status: 201
     else 
-      render json: ErrorSerializer.new.serialize_login_error
+      render json: ErrorSerializer.new.serialize_user_error(user.errors.full_messages), status: determine_status_code(user.errors.full_messages)
     end
   end
 
