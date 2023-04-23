@@ -9,11 +9,12 @@ class Api::V0::RoadTripsController < ApplicationController
       weather_info_for_destination = get_weather_info(params[:road_trip][:destination])
       directions = MapquestFacade.new.driving_directions(params[:road_trip][:origin], params[:road_trip][:destination])
       
-      if directions.time != nil && directions.time.split(":").first.to_i <= 119
-        a = hours_to_drive_from_origin_to_destination = directions.time.split(":").first.to_i
+      if directions.time != nil && round_hour(directions.time) <= 119
+        a = hours_to_drive_from_origin_to_destination = round_hour(directions.time)
         local_time_in_destination = weather_info_for_destination.location[:localtime]
-        b = current_hour_in_destination_as_integer = local_time_in_destination[10..-4].to_i
 
+        b = current_hour_in_destination_as_integer = round_time(local_time_in_destination[10..-1])
+        
         hours_from_midnight_of_current_day_to_query = a + b
         
         weather = determine_weather(hours_from_midnight_of_current_day_to_query, weather_info_for_destination) 
@@ -47,4 +48,22 @@ class Api::V0::RoadTripsController < ApplicationController
       weather_info_for_destination.hourly_four_tomorrow[hour_number-96]
     end
   end
+
+  def round_hour(time)
+    if time.split(":").second.to_i >= 30 
+      time.split(":").first.to_i + 1
+    else
+      time.split(":").first.to_i
+    end
+  end
+
+  def round_time(datetime)
+    split = datetime.split(":")
+    if split.second.to_i >= 30 
+      split.first.to_i + 1
+    else 
+      split.first.to_i
+    end
+  end
+
 end

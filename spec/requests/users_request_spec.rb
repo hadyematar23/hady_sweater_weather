@@ -6,9 +6,9 @@ RSpec.describe "Creating a User", type: :request do
       it "you will make a post call with the proposed email, password, and password confirmation in the payload" do
 
         payload = {
-            "email" => "hady1@gmail.com",
-            "password" => "fakepassword",
-            "password_confirmation" => "fakepassword"
+            "email": "hady1@gmail.com",
+            "password": "fakepassword",
+            "password_confirmation": "fakepassword"
         }
         post "/api/v0/users", headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, params: payload.to_json
 
@@ -33,9 +33,9 @@ RSpec.describe "Creating a User", type: :request do
         User.create!(email: "hady1@gmail.com", password: "test123", password_confirmation: "test123")
 
         payload = {
-          "email" => "hady1@gmail.com",
-          "password" => "fakepassword",
-          "password_confirmation" => "fakepassword"
+          "email": "hady1@gmail.com",
+          "password": "fakepassword",
+          "password_confirmation": "fakepassword"
       }
 
         post "/api/v0/users", headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, params: payload.to_json
@@ -54,9 +54,9 @@ RSpec.describe "Creating a User", type: :request do
 
       it "if the passwords don't match, you will get a 400 status code" do 
         payload = {
-          "email" => "hady1@gmail.com",
-          "password" => "password",
-          "password_confirmation" => "fakepassword"
+          "email": "hady1@gmail.com",
+          "password": "password",
+          "password_confirmation": "fakepassword"
       }
 
         post "/api/v0/users", headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, params: payload.to_json
@@ -70,9 +70,9 @@ RSpec.describe "Creating a User", type: :request do
 
       it "if a field is missing, you will get a 400 status code" do 
         payload = {
-          "email" => "",
-          "password" => "fakepassword",
-          "password_confirmation" => "fakepassword"
+          "email": "",
+          "password": "fakepassword",
+          "password_confirmation": "fakepassword"
       }
 
         post "/api/v0/users", headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }, params: payload.to_json
