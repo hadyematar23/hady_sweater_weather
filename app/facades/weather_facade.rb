@@ -5,6 +5,7 @@ class WeatherFacade
   end
 
   def find_weather_five_days 
-    @service.get_current_weather_five_days(@coordinate_info)
+    response = @service.get_current_weather_five_days(@coordinate_info)
+    weather_object = Weather.new(response)
   end
 end
