@@ -1,8 +1,8 @@
 class TeleportFacade
 
-  def find_salary_info(city)
+  def find_salary_results(city)
     @service = TeleportService.new
-    salaries = @service.get_search_results(city)
+    salaries = @service.get_salary_results(city)
   end
 
 
