@@ -8,7 +8,6 @@ RSpec.describe TeleportService, type: :service do
     it "you provide a city and it will provide you with all of the salary information for that urban area" do
       results = @service.get_salary_results("warsaw")
       expect(results).to be_a(Hash)
-      require 'pry'; binding.pry
       expect(results[:salaries]).to be_a(Array)
       results[:salaries].each do |job|
         expect(job).to be_a(Hash)

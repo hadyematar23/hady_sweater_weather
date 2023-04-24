@@ -9,7 +9,6 @@ class TeleportService
   def get_url(payload)
     response = connection.get(payload) 
     JSON.parse(response.body, symbolize_names: true)
-    
   end
 
   def connection 
