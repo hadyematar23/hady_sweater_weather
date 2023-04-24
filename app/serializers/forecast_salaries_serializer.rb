@@ -8,7 +8,6 @@ class ForecastSalariesSerializer
         "max": format("$%.2f", data[:percentile_75])
       }
     end
-    
     {
       "data": {
         "id": "null",
@@ -16,8 +15,8 @@ class ForecastSalariesSerializer
         "attributes": {
           "destination": destination,
           "forecast": {
-            "summary": forecast[:condition][:text],
-            "temperature": "#{forecast[:temp_f].to_i} F"
+            "summary": forecast[:conditions],
+            "temperature": "#{forecast[:temp].to_i} F"
           },
           "salaries": salaries_array
         }
