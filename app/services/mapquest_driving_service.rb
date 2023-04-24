@@ -8,7 +8,8 @@ class MapquestDrivingService
 
   def get_url(payload)
     response = connection.get(payload) 
-    JSON.parse(response.body, symbolize_names: true)
+    results = JSON.parse(response.body, symbolize_names: true)
+    return results[:route][:formattedTime]
   end
 
   def connection 

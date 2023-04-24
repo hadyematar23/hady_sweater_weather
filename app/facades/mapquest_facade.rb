@@ -8,7 +8,7 @@ class MapquestFacade
   def driving_directions(origin, destination)
     @service = MapquestDrivingService.new
     directions = @service.get_directions(origin, destination)
-    RoadTrip.new(origin, destination, directions[:route][:formattedTime])
+    RoadTrip.new(origin, destination, directions)
   end
 
   
