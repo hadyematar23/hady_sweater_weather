@@ -7,5 +7,11 @@ Rails.application.routes.draw do
       resources :sessions, only: [:create]
       post "/road_trip", to: "road_trips#create"
     end
+    namespace :v1 do 
+      resources :salaries
+    end
   end
 end
+
+
+
