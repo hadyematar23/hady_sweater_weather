@@ -8,7 +8,8 @@ class MapquestService
 
   def get_url(payload)
     response = connection.get(payload) 
-    JSON.parse(response.body, symbolize_names: true)
+    results = JSON.parse(response.body, symbolize_names: true)
+    return results[:results].first[:locations].first[:latLng]
   end
 
   def connection 

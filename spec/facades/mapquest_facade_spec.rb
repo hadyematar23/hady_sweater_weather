@@ -2,13 +2,13 @@ require 'rails_helper'
 
 RSpec.describe MapquestFacade, type: :facade do
   describe "location coordinates" do
-    it "inputs a city and will output the coordinates of the city in a coordinates poro", :vcr do
+    it "inputs a city and will output the coordinates in a hash", :vcr do #I determined that a PORO was not necessary here and thought it would be essentially overengineering
       @facade = MapquestFacade.new
 
       result = @facade.find_location_coordinates("Atlanta,GA")
       expect(result).to be_a(Hash)
-      expect(result[:results].first[:locations].first[:latLng][:lat]).to be_a(Float)
-      expect(result[:results].first[:locations].first[:latLng][:lng]).to be_a(Float)
+      expect(result[:lat]).to be_a(Float)
+      expect(result[:lng]).to be_a(Float)
     end
   end 
 

@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe "Forecast", type: :request do
   describe "GET /api/v0/forecast?location=cincinatti,oh" do
     it "the get call will be for a certain city and it gives you the weather back for that location", :vcr do
+      
       get "/api/v0/forecast?location=miami,fl", headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
       
       headers = response.request.headers.to_h.deep_symbolize_keys
@@ -11,6 +12,7 @@ RSpec.describe "Forecast", type: :request do
       expect(headers[:HTTP_ACCEPT]).to eq("application/json")
 
       parsed_forecast = JSON.parse(response.body, symbolize_names: true)
+      
       expect(parsed_forecast).to be_a(Hash)
       expect(parsed_forecast[:data][:id]).to eq(nil)
       expect(parsed_forecast[:data][:type]).to eq("forecast")

@@ -3,33 +3,7 @@ require 'rails_helper'
 RSpec.describe WeatherFacade, type: :facade do
   describe "location coordinates" do
     before :each do
-      coordinate = {:info=>{:statuscode=>0, :copyright=>{:text=>"© 2022 MapQuest, Inc.", :imageUrl=>"http://api.mqcdn.com/res/mqlogo.gif", :imageAltText=>"© 2022 MapQuest, Inc."}, :messages=>[]},
-      :options=>{:maxResults=>-1, :ignoreLatLngInput=>false},
-      :results=>
-       [{:providedLocation=>{:location=>"miami,fl"},
-         :locations=>
-          [{:street=>"",
-            :adminArea6=>"",
-            :adminArea6Type=>"Neighborhood",
-            :adminArea5=>"Miami",
-            :adminArea5Type=>"City",
-            :adminArea4=>"Miami-Dade",
-            :adminArea4Type=>"County",
-            :adminArea3=>"FL",
-            :adminArea3Type=>"State",
-            :adminArea1=>"US",
-            :adminArea1Type=>"Country",
-            :postalCode=>"",
-            :geocodeQualityCode=>"A5XAX",
-            :geocodeQuality=>"CITY",
-            :dragPoint=>false,
-            :sideOfStreet=>"N",
-            :linkId=>"0",
-            :unknownInput=>"",
-            :type=>"s",
-            :latLng=>{:lat=>25.77481, :lng=>-80.19773},
-            :displayLatLng=>{:lat=>25.77481, :lng=>-80.19773},
-            :mapUrl=>""}]}]}
+      coordinate = {:lat=>25.77481, :lng=>-80.19773}
       @facade = WeatherFacade.new(coordinate)
       @service = MapquestService.new
     end
