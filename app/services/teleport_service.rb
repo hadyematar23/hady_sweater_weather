@@ -8,6 +8,7 @@ class TeleportService
 
   def get_url(payload)
     response = connection.get(payload) 
+    require 'pry'; binding.pry
     JSON.parse(response.body, symbolize_names: true)
   end
 
