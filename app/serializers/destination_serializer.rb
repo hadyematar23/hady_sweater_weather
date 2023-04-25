@@ -43,7 +43,7 @@ class DestinationSerializer
               start_city: origin,
               end_city: destination,
               travel_time: travel_time,
-              weather_at_eta: "The current API can only support hourly forecast for up to five days out."
+              weather_at_eta: "The current API can only support hourly forecast for up to five days out from midnight of today."
           }
       }
   }
