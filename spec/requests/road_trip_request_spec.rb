@@ -172,7 +172,7 @@ RSpec.describe "Road Trip", type: :request do
         expect(parsed_response[:data][:attributes][:start_city]).to eq("London,England")
         expect(parsed_response[:data][:attributes][:end_city]).to eq("Kuala Lumpur,Malysia")
         expect(parsed_response[:data][:attributes][:travel_time]).to be_a(Integer)
-        expect(parsed_response[:data][:attributes][:weather_at_eta]).to eq("The current API can only support hourly forecast for up to five days out.")
+        expect(parsed_response[:data][:attributes][:weather_at_eta]).to eq("The current API can only support hourly forecast for up to five days out from midnight of today.")
       end
     end
   end 
